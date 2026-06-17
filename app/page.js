@@ -1,65 +1,241 @@
-import Image from "next/image";
+const navLinks = [
+  { label: "Home", href: "#home" },
+  { label: "Music", href: "#music" },
+  { label: "Photos", href: "#photos" },
+  { label: "Video", href: "#video" },
+  { label: "Contact", href: "#contact" },
+];
+
+const placeholderPhotos = [
+  { id: 1, label: "Live 01" },
+  { id: 2, label: "Live 02" },
+  { id: 3, label: "Studio" },
+  { id: 4, label: "Backstage" },
+  { id: 5, label: "Crowd" },
+  { id: 6, label: "Gear" },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="grain-overlay">
+      {/* Navigation */}
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-ash/80 bg-background/90 backdrop-blur-sm">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <a
+            href="#home"
+            className="font-display text-2xl tracking-[0.2em] text-blood uppercase"
+          >
+            SuperZero
+          </a>
+          <ul className="hidden items-center gap-8 sm:flex">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="font-body text-sm font-semibold uppercase tracking-[0.15em] text-zinc-400 transition-colors hover:text-blood"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <ul className="flex items-center gap-4 sm:hidden">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="font-body text-xs font-semibold uppercase tracking-wider text-zinc-400 transition-colors hover:text-blood"
+                >
+                  {link.label.charAt(0)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
+
+      {/* Hero */}
+      <section
+        id="home"
+        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-6"
+      >
+        <div
+          className="pointer-events-none absolute inset-0 opacity-30"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 80%, #8B0000 0%, transparent 60%), radial-gradient(ellipse at 20% 20%, #1a0000 0%, transparent 40%)",
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,#050505_100%)]" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-1 bg-blood" />
+
+        <div className="relative z-10 text-center">
+          <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.4em] text-zinc-500">
+            Southeast England
+          </p>
+          <h1 className="red-glow font-display text-[clamp(5rem,18vw,14rem)] leading-none tracking-[0.05em] text-white uppercase">
+            Super
+            <span className="text-blood">Zero</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-6 font-body text-lg font-semibold uppercase tracking-[0.3em] text-zinc-400">
+            Raw Rock &amp; Roll
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <a
+          href="#music"
+          className="absolute bottom-12 font-body text-xs font-semibold uppercase tracking-[0.3em] text-zinc-600 transition-colors hover:text-blood"
+        >
+          Scroll ↓
+        </a>
+      </section>
+
+      {/* Bio */}
+      <section className="border-t border-ash bg-charcoal px-6 py-24">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="section-divider mx-auto mb-12 w-32" />
+          <h2 className="mb-8 font-display text-5xl tracking-wider text-white uppercase">
+            The Band
+          </h2>
+          <p className="font-body text-xl leading-relaxed font-normal text-zinc-300">
+            A hard-hitting 4-piece rock band from Southeast England. Inspired by
+            AC/DC, The Doors, Black Sabbath and ZZ Top.
+          </p>
         </div>
-      </main>
+      </section>
+
+      {/* Music */}
+      <section id="music" className="border-t border-ash bg-background px-6 py-24">
+        <div className="mx-auto max-w-4xl">
+          <div className="section-divider mx-auto mb-12 w-32" />
+          <h2 className="mb-4 text-center font-display text-5xl tracking-wider text-white uppercase">
+            Music
+          </h2>
+          <p className="mb-12 text-center font-body text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
+            Tracks coming soon
+          </p>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[1, 2, 3].map((track) => (
+              <div
+                key={track}
+                className="group border border-ash bg-charcoal p-6 transition-colors hover:border-blood"
+              >
+                <div className="mb-4 flex h-32 items-center justify-center border border-ash bg-background">
+                  <span className="font-display text-4xl text-ash group-hover:text-blood">
+                    ▶
+                  </span>
+                </div>
+                <p className="font-display text-2xl tracking-wider text-zinc-400 uppercase">
+                  Track {track}
+                </p>
+                <p className="font-body text-xs uppercase tracking-widest text-zinc-600">
+                  Placeholder
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Photos */}
+      <section id="photos" className="border-t border-ash bg-charcoal px-6 py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="section-divider mx-auto mb-12 w-32" />
+          <h2 className="mb-12 text-center font-display text-5xl tracking-wider text-white uppercase">
+            Photos
+          </h2>
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4">
+            {placeholderPhotos.map((photo) => (
+              <div
+                key={photo.id}
+                className="group relative aspect-square overflow-hidden border border-ash bg-background"
+              >
+                <div
+                  className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
+                  style={{
+                    background: `linear-gradient(${135 + photo.id * 30}deg, #1a1a1a 0%, #8B0000 50%, #0a0a0a 100%)`,
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="font-display text-3xl tracking-widest text-zinc-600 uppercase transition-colors group-hover:text-zinc-400">
+                    {photo.label}
+                  </span>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 origin-left scale-x-0 bg-blood transition-transform duration-300 group-hover:scale-x-100" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Video */}
+      <section id="video" className="border-t border-ash bg-background px-6 py-24">
+        <div className="mx-auto max-w-4xl">
+          <div className="section-divider mx-auto mb-12 w-32" />
+          <h2 className="mb-12 text-center font-display text-5xl tracking-wider text-white uppercase">
+            Video
+          </h2>
+          <div className="relative aspect-video border-2 border-ash bg-charcoal">
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+              <span className="font-display text-7xl text-ash">▶</span>
+              <p className="font-body text-sm font-semibold uppercase tracking-[0.25em] text-zinc-500">
+                YouTube embed placeholder
+              </p>
+              <p className="font-body text-xs text-zinc-600">
+                Replace with your video URL
+              </p>
+            </div>
+            {/* Uncomment and add your YouTube video ID when ready:
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+              title="SuperZero video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+            */}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="border-t border-ash bg-charcoal px-6 py-24">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="section-divider mx-auto mb-12 w-32" />
+          <h2 className="mb-4 font-display text-5xl tracking-wider text-white uppercase">
+            Contact
+          </h2>
+          <p className="mb-12 font-body text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
+            Booking &amp; Enquiries
+          </p>
+          <div className="space-y-6">
+            <a
+              href="mailto:keenenbk@gmail.com"
+              className="block border border-ash bg-background px-8 py-6 font-body text-lg font-semibold uppercase tracking-wider text-zinc-300 transition-colors hover:border-blood hover:text-white"
+            >
+              keenenbk@gmail.com
+            </a>
+            <a
+              href="tel:+447764873881"
+              className="block border border-ash bg-background px-8 py-6 font-body text-lg font-semibold uppercase tracking-wider text-zinc-300 transition-colors hover:border-blood hover:text-white"
+            >
+              +44 7764 873881
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-blood bg-background px-6 py-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
+          <p className="font-display text-2xl tracking-[0.2em] text-blood uppercase">
+            SuperZero
+          </p>
+          <p className="font-body text-xs uppercase tracking-widest text-zinc-600">
+            © {new Date().getFullYear()} SuperZero. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
