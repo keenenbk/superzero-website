@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-const logoSrc = "/SuperZero Logo.png";
-
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Music", href: "#music" },
@@ -28,18 +26,9 @@ export default function Home() {
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a
             href="#home"
-            className="flex items-center gap-3 transition-opacity hover:opacity-90"
+            className="font-display text-2xl tracking-[0.2em] text-blood uppercase transition-opacity hover:opacity-90"
           >
-            <Image
-              src={logoSrc}
-              alt="SuperZero"
-              width={48}
-              height={48}
-              className="h-12 w-12 object-contain"
-            />
-            <span className="font-display text-2xl tracking-[0.2em] text-blood uppercase">
-              SuperZero
-            </span>
+            SuperZero
           </a>
           <ul className="hidden items-center gap-8 sm:flex">
             {navLinks.map((link) => (
@@ -92,14 +81,6 @@ export default function Home() {
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-1 bg-blood" />
 
         <div className="relative z-10 text-center">
-          <Image
-            src={logoSrc}
-            alt="SuperZero Rock & Roll"
-            width={300}
-            height={300}
-            priority
-            className="mx-auto mb-8 h-[300px] w-[300px] object-contain drop-shadow-[0_0_40px_rgba(139,0,0,0.35)]"
-          />
           <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.4em] text-zinc-500">
             Southeast England
           </p>
