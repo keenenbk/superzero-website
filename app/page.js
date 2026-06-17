@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+const logoSrc = "/SuperZero Logo.png";
+
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Music", href: "#music" },
@@ -9,12 +11,13 @@ const navLinks = [
 ];
 
 const photos = [
-  { id: 1, src: "/band.jpg", alt: "SuperZero band photo", label: "SuperZero" },
-  { id: 2, label: "Live 01" },
-  { id: 3, label: "Live 02" },
-  { id: 4, label: "Studio" },
-  { id: 5, label: "Backstage" },
-  { id: 6, label: "Crowd" },
+  { id: 1, src: "/Bk-1.png", alt: "BK", label: "BK" },
+  { id: 2, src: "/BK-2.png", alt: "BK", label: "BK" },
+  { id: 3, src: "/neil-1.png", alt: "Neil", label: "Neil" },
+  { id: 4, src: "/Sammy-1.png", alt: "Sammy", label: "Sammy" },
+  { id: 5, src: "/Sammy-2.png", alt: "Sammy", label: "Sammy" },
+  { id: 6, src: "/bex-1.png", alt: "Bex", label: "Bex" },
+  { id: 7, src: "/band.jpg", alt: "The Band", label: "The Band" },
 ];
 
 export default function Home() {
@@ -25,9 +28,18 @@ export default function Home() {
         <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <a
             href="#home"
-            className="font-display text-2xl tracking-[0.2em] text-blood uppercase"
+            className="flex items-center gap-3 transition-opacity hover:opacity-90"
           >
-            SuperZero
+            <Image
+              src={logoSrc}
+              alt="SuperZero"
+              width={48}
+              height={48}
+              className="h-12 w-12 object-contain"
+            />
+            <span className="font-display text-2xl tracking-[0.2em] text-blood uppercase">
+              SuperZero
+            </span>
           </a>
           <ul className="hidden items-center gap-8 sm:flex">
             {navLinks.map((link) => (
@@ -80,6 +92,14 @@ export default function Home() {
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-1 bg-blood" />
 
         <div className="relative z-10 text-center">
+          <Image
+            src={logoSrc}
+            alt="SuperZero Rock & Roll"
+            width={300}
+            height={300}
+            priority
+            className="mx-auto mb-8 h-[300px] w-[300px] object-contain drop-shadow-[0_0_40px_rgba(139,0,0,0.35)]"
+          />
           <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.4em] text-zinc-500">
             Southeast England
           </p>
@@ -154,42 +174,24 @@ export default function Home() {
           <h2 className="mb-12 text-center font-display text-5xl tracking-wider text-white uppercase">
             Photos
           </h2>
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4">
+          <div className="grid grid-cols-3 gap-2 md:gap-4">
             {photos.map((photo) => (
               <div
                 key={photo.id}
                 className="group relative aspect-square overflow-hidden border border-ash bg-background"
               >
-                {photo.src ? (
-                  <>
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-black/30 transition-colors group-hover:bg-black/10" />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-4 py-3">
-                      <span className="font-display text-xl tracking-widest text-white uppercase">
-                        {photo.label}
-                      </span>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div
-                      className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
-                      style={{
-                        background: `linear-gradient(${135 + photo.id * 30}deg, #1a1a1a 0%, #8B0000 50%, #0a0a0a 100%)`,
-                      }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="font-display text-3xl tracking-widest text-zinc-600 uppercase transition-colors group-hover:text-zinc-400">
-                        {photo.label}
-                      </span>
-                    </div>
-                  </>
-                )}
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/30 transition-colors duration-300 group-hover:bg-blood/50" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="red-glow font-display text-2xl tracking-[0.2em] text-white uppercase md:text-3xl">
+                    {photo.label}
+                  </span>
+                </div>
                 <div className="absolute bottom-0 left-0 right-0 h-1 origin-left scale-x-0 bg-blood transition-transform duration-300 group-hover:scale-x-100" />
               </div>
             ))}

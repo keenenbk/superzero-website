@@ -17,6 +17,10 @@ export const metadata = {
   title: "SuperZero | Rock Band",
   description:
     "A hard-hitting 4-piece rock band from Southeast England. Inspired by AC/DC, The Doors, Black Sabbath and ZZ Top.",
+  icons: {
+    icon: "/SuperZero Logo.png",
+    apple: "/SuperZero Logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
