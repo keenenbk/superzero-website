@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Music", href: "#music" },
@@ -6,13 +8,13 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-const placeholderPhotos = [
-  { id: 1, label: "Live 01" },
-  { id: 2, label: "Live 02" },
-  { id: 3, label: "Studio" },
-  { id: 4, label: "Backstage" },
-  { id: 5, label: "Crowd" },
-  { id: 6, label: "Gear" },
+const photos = [
+  { id: 1, src: "/band.jpg", alt: "SuperZero band photo", label: "SuperZero" },
+  { id: 2, label: "Live 01" },
+  { id: 3, label: "Live 02" },
+  { id: 4, label: "Studio" },
+  { id: 5, label: "Backstage" },
+  { id: 6, label: "Crowd" },
 ];
 
 export default function Home() {
@@ -59,14 +61,22 @@ export default function Home() {
         id="home"
         className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-6"
       >
+        <Image
+          src="/band.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-black/70" />
         <div
-          className="pointer-events-none absolute inset-0 opacity-30"
+          className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             background:
               "radial-gradient(ellipse at 50% 80%, #8B0000 0%, transparent 60%), radial-gradient(ellipse at 20% 20%, #1a0000 0%, transparent 40%)",
           }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,#050505_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,0.3)_0%,#050505_100%)]" />
         <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-1 bg-blood" />
 
         <div className="relative z-10 text-center">
@@ -145,22 +155,41 @@ export default function Home() {
             Photos
           </h2>
           <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4">
-            {placeholderPhotos.map((photo) => (
+            {photos.map((photo) => (
               <div
                 key={photo.id}
                 className="group relative aspect-square overflow-hidden border border-ash bg-background"
               >
-                <div
-                  className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
-                  style={{
-                    background: `linear-gradient(${135 + photo.id * 30}deg, #1a1a1a 0%, #8B0000 50%, #0a0a0a 100%)`,
-                  }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-display text-3xl tracking-widest text-zinc-600 uppercase transition-colors group-hover:text-zinc-400">
-                    {photo.label}
-                  </span>
-                </div>
+                {photo.src ? (
+                  <>
+                    <Image
+                      src={photo.src}
+                      alt={photo.alt}
+                      fill
+                      className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/30 transition-colors group-hover:bg-black/10" />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-4 py-3">
+                      <span className="font-display text-xl tracking-widest text-white uppercase">
+                        {photo.label}
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div
+                      className="absolute inset-0 opacity-40 transition-opacity group-hover:opacity-60"
+                      style={{
+                        background: `linear-gradient(${135 + photo.id * 30}deg, #1a1a1a 0%, #8B0000 50%, #0a0a0a 100%)`,
+                      }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="font-display text-3xl tracking-widest text-zinc-600 uppercase transition-colors group-hover:text-zinc-400">
+                        {photo.label}
+                      </span>
+                    </div>
+                  </>
+                )}
                 <div className="absolute bottom-0 left-0 right-0 h-1 origin-left scale-x-0 bg-blood transition-transform duration-300 group-hover:scale-x-100" />
               </div>
             ))}
@@ -176,24 +205,13 @@ export default function Home() {
             Video
           </h2>
           <div className="relative aspect-video border-2 border-ash bg-charcoal">
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-              <span className="font-display text-7xl text-ash">▶</span>
-              <p className="font-body text-sm font-semibold uppercase tracking-[0.25em] text-zinc-500">
-                YouTube embed placeholder
-              </p>
-              <p className="font-body text-xs text-zinc-600">
-                Replace with your video URL
-              </p>
-            </div>
-            {/* Uncomment and add your YouTube video ID when ready:
             <iframe
               className="absolute inset-0 h-full w-full"
-              src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+              src="https://www.youtube.com/embed/ZwNJrEPzbFs"
               title="SuperZero video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
-            */}
           </div>
         </div>
       </section>
