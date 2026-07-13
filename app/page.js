@@ -8,7 +8,7 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-const photos = [
+const livePhotos = [
   { id: 1, src: "/crowfest-24.png", alt: "SuperZero live at Crowfest", label: "Live" },
   { id: 2, src: "/crowfest-13.png", alt: "SuperZero live performance", label: "Live" },
   { id: 3, src: "/crowfest-5.png", alt: "SuperZero on stage", label: "Live" },
@@ -18,11 +18,48 @@ const photos = [
   { id: 7, src: "/crowfest-25.png", alt: "SuperZero on stage", label: "Live" },
 ];
 
+const memberPhotos = [
+  { id: 1, src: "/Bk-1.png", alt: "BK", label: "BK" },
+  { id: 2, src: "/BK-2.png", alt: "BK", label: "BK" },
+  { id: 3, src: "/neil-1.png", alt: "Neil", label: "Neil" },
+  { id: 4, src: "/Sammy-1.png", alt: "Sammy", label: "Sammy" },
+  { id: 5, src: "/Sammy-2.png", alt: "Sammy", label: "Sammy" },
+  { id: 6, src: "/bex-1.png", alt: "Bex", label: "Bex" },
+  { id: 7, src: "/band.jpg", alt: "The Band", label: "The Band" },
+];
+
 const tracks = [
   { id: 1, title: "Track 1", artwork: "/crowfest-13.png" },
   { id: 2, title: "Track 2", artwork: "/crowfest-24.png" },
   { id: 3, title: "Track 3", artwork: "/crowfest-17.png" },
 ];
+
+function PhotoGrid({ photos }) {
+  return (
+    <div className="grid grid-cols-3 gap-2 md:gap-4">
+      {photos.map((photo) => (
+        <div
+          key={photo.id}
+          className="group relative aspect-square overflow-hidden border border-ash bg-background"
+        >
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-black/30 transition-colors duration-300 group-hover:bg-blood/50" />
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <span className="red-glow font-display text-2xl tracking-[0.2em] text-white uppercase md:text-3xl">
+              {photo.label}
+            </span>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 h-1 origin-left scale-x-0 bg-blood transition-transform duration-300 group-hover:scale-x-100" />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -169,27 +206,22 @@ export default function Home() {
           <h2 className="mb-12 text-center font-display text-5xl tracking-wider text-white uppercase">
             Photos
           </h2>
-          <div className="grid grid-cols-3 gap-2 md:gap-4">
-            {photos.map((photo) => (
-              <div
-                key={photo.id}
-                className="group relative aspect-square overflow-hidden border border-ash bg-background"
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/30 transition-colors duration-300 group-hover:bg-blood/50" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="red-glow font-display text-2xl tracking-[0.2em] text-white uppercase md:text-3xl">
-                    {photo.label}
-                  </span>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 h-1 origin-left scale-x-0 bg-blood transition-transform duration-300 group-hover:scale-x-100" />
-              </div>
-            ))}
+
+          <div className="mb-16">
+            <h3 className="mb-2 text-center font-display text-3xl tracking-wider text-white uppercase">
+              Live
+            </h3>
+            <p className="mb-8 text-center font-body text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
+              Crowfest
+            </p>
+            <PhotoGrid photos={livePhotos} />
+          </div>
+
+          <div>
+            <h3 className="mb-8 text-center font-display text-3xl tracking-wider text-white uppercase">
+              The Band
+            </h3>
+            <PhotoGrid photos={memberPhotos} />
           </div>
         </div>
       </section>
