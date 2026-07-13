@@ -9,13 +9,19 @@ const navLinks = [
 ];
 
 const photos = [
-  { id: 1, src: "/Bk-1.png", alt: "BK", label: "BK" },
-  { id: 2, src: "/BK-2.png", alt: "BK", label: "BK" },
-  { id: 3, src: "/neil-1.png", alt: "Neil", label: "Neil" },
-  { id: 4, src: "/Sammy-1.png", alt: "Sammy", label: "Sammy" },
-  { id: 5, src: "/Sammy-2.png", alt: "Sammy", label: "Sammy" },
-  { id: 6, src: "/bex-1.png", alt: "Bex", label: "Bex" },
-  { id: 7, src: "/band.jpg", alt: "The Band", label: "The Band" },
+  { id: 1, src: "/crowfest-24.png", alt: "SuperZero live at Crowfest", label: "Live" },
+  { id: 2, src: "/crowfest-13.png", alt: "SuperZero live performance", label: "Live" },
+  { id: 3, src: "/crowfest-5.png", alt: "SuperZero on stage", label: "Live" },
+  { id: 4, src: "/crowfest-17.png", alt: "SuperZero at Crowfest", label: "Live" },
+  { id: 5, src: "/crowfest-18.png", alt: "SuperZero performing", label: "Live" },
+  { id: 6, src: "/crowfest-12.png", alt: "Sammy on bass", label: "Sammy" },
+  { id: 7, src: "/crowfest-25.png", alt: "SuperZero on stage", label: "Live" },
+];
+
+const tracks = [
+  { id: 1, title: "Track 1", artwork: "/crowfest-13.png" },
+  { id: 2, title: "Track 2", artwork: "/crowfest-24.png" },
+  { id: 3, title: "Track 3", artwork: "/crowfest-17.png" },
 ];
 
 export default function Home() {
@@ -63,8 +69,8 @@ export default function Home() {
         className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-6"
       >
         <Image
-          src="/band.jpg"
-          alt=""
+          src="/hero.png"
+          alt="SuperZero performing live"
           fill
           priority
           className="object-cover object-center"
@@ -126,21 +132,29 @@ export default function Home() {
             Tracks coming soon
           </p>
           <div className="grid gap-4 sm:grid-cols-3">
-            {[1, 2, 3].map((track) => (
+            {tracks.map((track) => (
               <div
-                key={track}
+                key={track.id}
                 className="group border border-ash bg-charcoal p-6 transition-colors hover:border-blood"
               >
-                <div className="mb-4 flex h-32 items-center justify-center border border-ash bg-background">
-                  <span className="font-display text-4xl text-ash group-hover:text-blood">
-                    ▶
-                  </span>
+                <div className="relative mb-4 h-32 overflow-hidden border border-ash bg-background">
+                  <Image
+                    src={track.artwork}
+                    alt={track.title}
+                    fill
+                    className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 transition-colors group-hover:bg-black/20">
+                    <span className="font-display text-4xl text-white/80 group-hover:text-blood">
+                      ▶
+                    </span>
+                  </div>
                 </div>
                 <p className="font-display text-2xl tracking-wider text-zinc-400 uppercase">
-                  Track {track}
+                  {track.title}
                 </p>
                 <p className="font-body text-xs uppercase tracking-widest text-zinc-600">
-                  Placeholder
+                  Coming soon
                 </p>
               </div>
             ))}
