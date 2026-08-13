@@ -34,6 +34,28 @@ const tracks = [
   { id: 3, title: "Track 3", artwork: "/crowfest-17.png" },
 ];
 
+const featuredVideoId = "RahcEITHzd4";
+
+function youtubeEmbedUrl(videoId, { autoplay = false, controls = true } = {}) {
+  const params = new URLSearchParams({
+    rel: "0",
+    modestbranding: "1",
+    playsinline: "1",
+  });
+
+  if (autoplay) {
+    params.set("autoplay", "1");
+    params.set("mute", "1");
+    params.set("loop", "1");
+    params.set("playlist", videoId);
+    params.set("controls", "0");
+  } else if (!controls) {
+    params.set("controls", "0");
+  }
+
+  return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+}
+
 function PhotoGrid({ photos }) {
   return (
     <div className="grid grid-cols-3 gap-2 md:gap-4">
@@ -105,13 +127,16 @@ export default function Home() {
         id="home"
         className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-6"
       >
-        <Image
-          src="/hero.png"
-          alt="SuperZero performing live"
-          fill
-          priority
-          className="object-cover object-center"
-        />
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 h-[56.25vw] min-h-full w-[177.78vh] min-w-full -translate-x-1/2 -translate-y-1/2"
+            src={youtubeEmbedUrl(featuredVideoId, { autoplay: true })}
+            title="SuperZero live performance"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
         <div className="pointer-events-none absolute inset-0 bg-black/70" />
         <div
           className="pointer-events-none absolute inset-0 opacity-40"
@@ -236,9 +261,10 @@ export default function Home() {
           <div className="relative aspect-video border-2 border-ash bg-charcoal">
             <iframe
               className="absolute inset-0 h-full w-full"
-              src="https://www.youtube.com/embed/ZwNJrEPzbFs"
+              src={youtubeEmbedUrl(featuredVideoId)}
               title="SuperZero video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
             />
           </div>
