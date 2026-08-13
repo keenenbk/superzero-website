@@ -46,9 +46,10 @@ function youtubeEmbedUrl(videoId, { autoplay = false, controls = true } = {}) {
   if (autoplay) {
     params.set("autoplay", "1");
     params.set("mute", "1");
-  }
-
-  if (!controls) {
+    params.set("loop", "1");
+    params.set("playlist", videoId);
+    params.set("controls", "0");
+  } else if (!controls) {
     params.set("controls", "0");
   }
 
@@ -124,37 +125,45 @@ export default function Home() {
       {/* Hero */}
       <section
         id="home"
-        className="relative border-b border-ash bg-background pt-24"
+        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-6"
       >
-        <div className="mx-auto max-w-6xl px-6 pb-8 pt-10 text-center">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 h-[56.25vw] min-h-full w-[177.78vh] min-w-full -translate-x-1/2 -translate-y-1/2"
+            src={youtubeEmbedUrl(featuredVideoId, { autoplay: true, controls: false })}
+            title="SuperZero live performance"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+        <div className="pointer-events-none absolute inset-0 bg-black/35" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 80%, #8B0000 0%, transparent 60%), radial-gradient(ellipse at 20% 20%, #1a0000 0%, transparent 40%)",
+          }}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,0.1)_0%,rgba(5,5,5,0.45)_100%)]" />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-1 bg-blood" />
+
+        <div className="relative z-10 text-center">
           <p className="mb-4 font-body text-sm font-semibold uppercase tracking-[0.4em] text-zinc-500">
             Southeast England
           </p>
-          <h1 className="red-glow font-display text-[clamp(3.5rem,12vw,8rem)] leading-none tracking-[0.05em] text-white uppercase">
+          <h1 className="red-glow font-display text-[clamp(5rem,18vw,14rem)] leading-none tracking-[0.05em] text-white uppercase">
             Super
             <span className="text-blood">Zero</span>
           </h1>
-          <p className="mt-4 font-body text-base font-semibold uppercase tracking-[0.3em] text-zinc-400 sm:text-lg">
+          <p className="mt-6 font-body text-lg font-semibold uppercase tracking-[0.3em] text-zinc-400">
             Raw Rock &amp; Roll
           </p>
         </div>
 
-        <div id="video" className="mx-auto max-w-5xl px-6 pb-16">
-          <div className="relative aspect-video border-2 border-ash bg-charcoal shadow-[0_0_60px_rgba(139,0,0,0.15)]">
-            <iframe
-              className="absolute inset-0 h-full w-full"
-              src={youtubeEmbedUrl(featuredVideoId, { autoplay: true })}
-              title="SuperZero live performance"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
-          </div>
-        </div>
-
         <a
           href="#music"
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 font-body text-xs font-semibold uppercase tracking-[0.3em] text-zinc-600 transition-colors hover:text-blood"
+          className="absolute bottom-12 font-body text-xs font-semibold uppercase tracking-[0.3em] text-zinc-600 transition-colors hover:text-blood"
         >
           Scroll ↓
         </a>
@@ -238,6 +247,26 @@ export default function Home() {
               The Band
             </h3>
             <PhotoGrid photos={memberPhotos} />
+          </div>
+        </div>
+      </section>
+
+      {/* Video */}
+      <section id="video" className="border-t border-ash bg-background px-6 py-24">
+        <div className="mx-auto max-w-4xl">
+          <div className="section-divider mx-auto mb-12 w-32" />
+          <h2 className="mb-12 text-center font-display text-5xl tracking-wider text-white uppercase">
+            Video
+          </h2>
+          <div className="relative aspect-video border-2 border-ash bg-charcoal">
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              src={youtubeEmbedUrl(featuredVideoId)}
+              title="SuperZero video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
           </div>
         </div>
       </section>
